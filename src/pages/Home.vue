@@ -1,7 +1,7 @@
 <template>
   <h1>近日開催のイベント</h1>
   <h2>注目キーワード</h2>
-  <button class="btn-tag">#SDGs</button>
+  <button @click="showEventByTag('SDGs')" class="btn-tag">#SDGs</button>
   <button class="btn-tag">#DX</button>
   <button class="btn-tag">#テレワーク</button>
   <button class="btn-tag">#参加無料</button>
@@ -70,7 +70,22 @@
 </template>
 
 <script>
-export default {};
+import { useRoute, useRouter } from "vue-router";
+
+export default {
+  name: "Home",
+  setup() {
+    const router = useRouter();
+    function showEventByTag(tagName) {
+      router.push({
+        name: "eventsbytag",
+        // path: "/eventlist/detail",
+        params: { name: tagName },
+      });
+    }
+    return { showEventByTag };
+  },
+};
 </script>
 
 <style scoped>

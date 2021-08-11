@@ -1,46 +1,35 @@
 import { createStore } from "vuex";
+import Axios from "axios";
+import axios from "axios";
 
-import { nanoid } from "nanoid";
-var faker = require("faker");
+const baseUrl = "http://localhost:3500";
+const eventsUrl = `${baseUrl}/events`;
+const tagsUrl = `${baseUrl}/tags`;
 
-const testData = [];
-var categories = ["Watersports", "Soccer", "Chess", "Running"];
-var isClosed = [true, false];
-for (let i = 1; i <= 10; i++) {
-  testData.push({
-    id: nanoid(),
-    title: faker.lorem.sentence(3),
-    //description: `This is Event #${i}`,
-    description: faker.lorem.paragraphs(3),
-    datetime: faker.date.recent(),
-    streetAddress: faker.address.streetAddress() || "Online",
-    speakers: [
-      {
-        speakerId: nanoid(),
-        speakerName: faker.name.findName(),
+const actions = {
+  async getEventData(context) {
+    // context.commit("SET_EVENTS", (await axios.get(eventsUrl)).data);
+    await axios.get(eventsUrl).then(
+      (response) => {
+        context.commit("SET_EVENTS", response.data);
       },
-      { speakerId: nanoid(), speakerName: faker.name.findName() },
-      { speakerId: nanoid(), speakerName: faker.name.findName() },
-    ],
-    createdDate: faker.date.recent(),
-    dueDate: faker.date.between(faker.date.recent(), faker.date.future(30)),
-    categories: categories,
-    img: faker.image.imageUrl(),
-    isClosed: faker.helpers.randomize(isClosed),
-    eventOrganizer: faker.company.companyName(),
-    fee: "29,800" || "Free",
-    qa: faker.internet.exampleEmail(),
-    programs: [],
-  });
-}
+      (error) => {
+        errMsg: error.message;
+      }
+    );
+  },
+};
 
-const actions = {};
-
-const mutations = {};
+const mutations = {
+  SET_EVENTS(state, events) {
+    state.events = events;
+  },
+};
 
 const state = {
-  events: testData,
-  eventsTotal: testData.length,
+  events: [],
+  // eventsTotal: testData.length,
+  searchTerm: "",
 };
 
 const getters = {
@@ -48,6 +37,10 @@ const getters = {
     return state.events.find((event) => event.id === id);
   },
   events: (state) => [...state.events],
+
+  eventsFilteredByTag: (state) => (tag) => {
+    return state.events.filter((event) => event.tags === tag);
+  },
 };
 
 export default createStore({

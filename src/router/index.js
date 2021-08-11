@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EventList from "../pages/EventList";
 import EventDetail from "../pages/EventDetail";
+import TagEventList from "../pages/TagEventList";
 import Home from "../pages/Home";
 import About from "../pages/About";
 // import PageNotFound from "../pages/404";
@@ -13,6 +14,7 @@ const router = createRouter({
     { name: "home", path: "/home", component: Home },
     { name: "about", path: "/about", component: About },
     { name: "event", path: "/event", component: EventList },
+    { name: "eventsbytag", path: "/tag/:name", component: TagEventList },
     { name: "eventdetail", path: "/event/:id", component: EventDetail },
 
     //   {
