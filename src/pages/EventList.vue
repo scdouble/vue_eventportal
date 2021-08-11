@@ -8,14 +8,12 @@ import EventItem from "./EventItem.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "EventList",
-
-  computed: {
-    ...mapGetters(["events"]),
-  },
   components: {
     EventItem,
   },
-  mounted() {},
+  computed: {
+    ...mapGetters(["events"]),
+  },
 };
 </script>
 
