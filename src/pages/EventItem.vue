@@ -1,16 +1,15 @@
 <template>
   <div class="event">
-    <img src="" alt="" sizes="" srcset="" />
-    <span>{{ event.datetime }} at {{ event.streetAddress }}</span>
-    <h3>{{ event.title }}</h3>
-    <router-link
-      :to="{
-        name: 'eventdetail',
-        path: '/event',
-        params: { id: event.id },
-      }"
-      >詳細を見る</router-link
-    >
+    <div class="image">
+      <img src="../assets/eventsample.jpg" />
+    </div>
+
+    <div class="info">
+      <h3>{{ event.title }}</h3>
+      <span>{{ event.datetime }} at {{ event.streetAddress }}</span>
+    </div>
+
+    <button class="btn" @click="showDetail(event)">詳細を見る</button>
   </div>
 </template>
 
@@ -30,7 +29,7 @@ export default {
       router.push({
         name: "eventdetail",
         // path: "/eventlist/detail",
-        query: { id: event.id },
+        params: { id: event.id },
       });
     }
 
