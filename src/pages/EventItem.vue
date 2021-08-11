@@ -1,7 +1,7 @@
 <template>
   <div class="event">
     <img src="" alt="" sizes="" srcset="" />
-    <span>{{ event.datetime }} at {{ event.place }}</span>
+    <span>{{ event.datetime }} at {{ event.streetAddress }}</span>
     <h3>{{ event.title }}</h3>
     <router-link
       :to="{
