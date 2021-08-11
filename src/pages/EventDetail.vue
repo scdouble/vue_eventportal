@@ -3,9 +3,8 @@
   <h3>Event ID:</h3>
   <p>{{ event.id }}</p>
 
-  
   <h3>Event Time:</h3>
- <p>{{ event.datetime }}</p> 
+  <p>{{ event.datetime }}</p>
 
   <button class="btn">申し込み</button>
 
@@ -20,7 +19,9 @@
     </li>
   </ul>
   <button class="btn">申し込み</button>
-  <button class="btn-secondary" @click="backToEventList()">イベント一覧に戻る</button>
+  <button class="btn-secondary" @click="backToEventList()">
+    イベント一覧に戻る
+  </button>
 </template>
 
 <script>
@@ -37,57 +38,48 @@ export default {
     const router = useRouter();
     const { id } = route.params;
 
-    function backToEventList(){
-      router.push('/event')
+    function backToEventList() {
+      router.push("/event");
     }
     return {
       event: computed(() => store.getters.eventById(id)),
-      backToEventList
+      backToEventList,
     };
-  },
-  computed: {
-    eventID() {
-      return this.$route.params.id;
-    },
-  },
-  mounted() {
-    
   },
 };
 </script>
 
 <style scoped>
-
 .event {
-    position: relative;
-    padding-top: 40px;
+  position: relative;
+  padding-top: 40px;
 }
 
 .event h3 {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .event p {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .image {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .controls {
-    position: absolute;
-    right: 30px;
-    top: 0;
+  position: absolute;
+  right: 30px;
+  top: 0;
 }
 
 .delete {
-    margin-left: 20px;
-    color: red;
+  margin-left: 20px;
+  color: red;
 }
 
 .back {
-    display: block;
-    margin-top: 40px;
+  display: block;
+  margin-top: 40px;
 }
 </style>
