@@ -11,7 +11,8 @@
     </nav>
 
     <input type="text" /> <button>Search</button>
-
+    <button>English</button>
+    <button>マイページ</button>
     <button>login</button>
     <button>logout</button>
   </header>
