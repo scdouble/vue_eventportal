@@ -9,6 +9,7 @@ import About from "../pages/About";
 // ルーターを作成する
 const router = createRouter({
   routes: [
+    { path: "/", component: Home },
     { name: "home", path: "/home", component: Home },
     { name: "about", path: "/about", component: About },
     { name: "event", path: "/event", component: EventList },
