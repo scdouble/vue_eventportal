@@ -3,20 +3,39 @@
 
   <router-view></router-view>
 
+  <Toast
+    v-bind:toastMessage="toastMessage"
+    v-bind:toastVisible="toastVisible"
+    v-bind:toastType="toastType"
+  />
+
   <Footer />
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import Toast from "./components/Toast.vue";
 
-import { mapActions } from "vuex";
+import { mapActions, useStore } from "vuex";
+import { computed } from "vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Footer,
+    Toast,
+  },
+
+  setup() {
+    const store = useStore();
+    // let message = "Hello world";
+    return {
+      toastVisible: computed(() => store.state.toastVisible),
+      toastMessage: computed(() => store.state.toastMessage),
+      toastType: computed(() => store.state.toastType),
+    };
   },
   methods: {
     ...mapActions({

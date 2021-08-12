@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import Axios from "axios";
+
 import axios from "axios";
 
 const baseUrl = "http://localhost:3500";
@@ -12,9 +12,18 @@ const actions = {
     await axios.get(eventsUrl).then(
       (response) => {
         context.commit("SET_EVENTS", response.data);
+        context.commit("SET_TOAST", {
+          toastVisible: true,
+          toastMessage: "Data loaded successfully",
+          toastType: "success",
+        });
       },
       (error) => {
-        errMsg: error.message;
+        context.commit("SET_TOAST", {
+          toastVisible: true,
+          toastMessage: `Error in loading data from server: ${error.message}`,
+          toastType: "error",
+        });
       }
     );
   },
@@ -24,12 +33,27 @@ const mutations = {
   SET_EVENTS(state, events) {
     state.events = events;
   },
+
+  SET_TOAST(state, toast) {
+    state.toastVisible = toast.toastVisible;
+    state.toastMessage = toast.toastMessage;
+    state.toastType = toast.toastType;
+  },
+
+  DISMISS_TOAST(state) {
+    state.toastVisible = false;
+  },
 };
 
 const state = {
   events: [],
   // eventsTotal: testData.length,
   searchTerm: "",
+
+  //
+  toastVisible: false,
+  toastMessage: "",
+  toastType: "", //error, success, info
 };
 
 const getters = {
