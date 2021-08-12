@@ -1,11 +1,11 @@
 // このファイルはルーターを作るためのもの
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import EventList from "../pages/EventList";
 import EventDetail from "../pages/EventDetail";
 import TagEventList from "../pages/TagEventList";
 import Home from "../pages/Home";
 import About from "../pages/About";
-// import PageNotFound from "../pages/404";
+import PageNotFound from "../pages/404";
 
 // ルーターを作成する
 const router = createRouter({
@@ -16,6 +16,7 @@ const router = createRouter({
     { name: "event", path: "/event", component: EventList },
     { name: "eventsbytag", path: "/tag/:name", component: TagEventList },
     { name: "eventdetail", path: "/event/:id", component: EventDetail },
+    { path: "/:pathMatch(.*)*", component: PageNotFound },
 
     //   {
     //     name: "404",
@@ -25,7 +26,7 @@ const router = createRouter({
     //   },
   ],
 
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
 });
 
 export default router;
