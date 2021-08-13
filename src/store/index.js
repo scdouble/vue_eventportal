@@ -63,7 +63,7 @@ const getters = {
   events: (state) => [...state.events],
 
   eventsFilteredByTag: (state) => (tag) => {
-    return state.events.filter((event) => event.tags === tag);
+    return state.events.filter((event) => event.tags.includes(tag));
   },
 };
 
