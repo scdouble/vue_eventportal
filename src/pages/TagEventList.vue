@@ -1,5 +1,6 @@
 <template>
-  <h1>#に関連するイベント</h1>
+  <h1>#{{ tagName }}に関連するイベント</h1>
+
   <EventItem v-for="event in events" :key="event.id" :event="event" />
 </template>
 
@@ -7,7 +8,7 @@
 import EventItem from "./EventItem.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 export default {
   name: "EventList",
@@ -19,7 +20,7 @@ export default {
     const route = useRoute();
     // const router = useRouter();
     const { name } = route.params;
-
+    console.log(name);
     return {
       tagName: name,
       events: computed(() => store.getters.eventsFilteredByTag(name)),

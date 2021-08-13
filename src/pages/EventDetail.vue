@@ -1,5 +1,7 @@
 <template>
   <h1>{{ event.title }}</h1>
+  <Tag v-for="(tag, index) in event.tags" :key="index" :tagName="tag" />
+
   <h3>Event ID:</h3>
   <p>{{ event.id }}</p>
 
@@ -29,8 +31,13 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+import Tag from "../components/Tag.vue";
+
 export default {
   name: "EventDetail",
+  components: {
+    Tag,
+  },
   setup() {
     const store = useStore();
 

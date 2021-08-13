@@ -5,8 +5,11 @@
     </div>
 
     <div class="info">
+      <Tag v-for="(tag, index) in event.tags" :key="index" :tagName="tag" />
+
       <h3>{{ event.title }}</h3>
-      <span>{{ event.datetime }} at {{ event.streetAddress }}</span>
+      <p>開催日時: {{ event.datetime }}</p>
+      <p>開催場所: {{ event.streetAddress }}</p>
     </div>
 
     <button class="btn" @click="showDetail(event)">詳細を見る</button>
@@ -14,12 +17,17 @@
 </template>
 
 <script>
+import Tag from "../components/Tag";
 import { useRouter, useRoute } from "vue-router";
 
 export default {
   name: "EventItem",
-
-  props: ["event"],
+  components: {
+    Tag,
+  },
+  props: {
+    event: Object,
+  },
 
   setup() {
     const router = useRouter();
@@ -57,6 +65,19 @@ export default {
 
 .info {
   flex: 2;
+  margin: 20px;
+}
+
+.btn-tag {
+  font: inherit;
+  font-size: 13px;
+  background: skyblue;
+  color: white !important;
+  border: 0;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin: 0 10px;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
