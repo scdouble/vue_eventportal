@@ -14,7 +14,12 @@ const router = createRouter({
     { name: "home", path: "/home", component: Home },
     { name: "about", path: "/about", component: About },
     { name: "event", path: "/event", component: EventList },
-    { name: "eventsbytag", path: "/tag/:name", component: TagEventList },
+    {
+      name: "eventsbytag",
+      path: "/tag/:name",
+      component: TagEventList,
+      props: (route) => ({ name: route.params.name }),
+    },
     { name: "eventdetail", path: "/event/:id", component: EventDetail },
     { path: "/:pathMatch(.*)*", component: PageNotFound },
 

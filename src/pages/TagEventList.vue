@@ -7,26 +7,57 @@
 <script>
 import EventItem from "./EventItem.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed, watch, ref, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   name: "EventList",
   components: {
     EventItem,
   },
-  setup() {
+  props: {
+    name: {
+      type: String,
+      default: "Vue!",
+    },
+  },
+  setup(props) {
     const store = useStore();
     const route = useRoute();
-    // const router = useRouter();
+    const router = useRouter();
     const { name } = route.params;
-    console.log(name);
+
+    //console.log(props);
+
+    // watch(
+    //   props,
+    //   (newValue, oldValue) => {
+    //     router.push({
+    //       name: "eventsbytag",
+    //       params: { name: newValue.name },
+    //     });
+    //   },
+    //   { deep: true }
+    // );
     return {
       tagName: name,
       events: computed(() => store.getters.eventsFilteredByTag(name)),
     };
   },
-  created() {},
+
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (toParams, previousParams) => {
+        // console.log(toParams, previousParams);
+        // react to route changes...
+        // this.$router.push({
+        //   name: "eventsbytag",
+        //   params: { name: toParams.name },
+        // });
+      }
+    );
+  },
 };
 </script>
 

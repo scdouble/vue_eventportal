@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+
 export default {
   name: "Tag",
   props: {
@@ -13,10 +14,11 @@ export default {
   },
   setup() {
     const router = useRouter();
+
     function showEventByTag(tagName) {
       router.push({
         name: "eventsbytag",
-        // path: "/eventlist/detail",
+        path: "/tag",
         params: { name: tagName },
       });
     }

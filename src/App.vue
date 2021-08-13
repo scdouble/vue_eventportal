@@ -1,8 +1,9 @@
 <template>
   <Header />
 
-  <router-view></router-view>
-
+  <!-- https://stackoverflow.com/questions/40404787/best-practice-for-reacting-to-params-changes-with-vue-router -->
+  <router-view :key="$route.fullPath"></router-view>
+  <!-- <router-view></router-view> -->
   <Toast
     v-bind:toastMessage="toastMessage"
     v-bind:toastVisible="toastVisible"
