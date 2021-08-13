@@ -4,11 +4,25 @@ const { nanoid } = require("nanoid");
 faker.seed(100);
 
 const data = [];
-var tags = ["SDGs", "テレワーク", "無料参加", "DX"];
+var tagCategory = [
+  "SDGs",
+  "テレワーク",
+  "無料参加",
+  "DX",
+  "働き方改革",
+  "脱炭素",
+  "地方創生",
+  "投資",
+  "土日祝開催",
+];
 var isClosed = [true, false];
 
-for (let i = 1; i <= 10; i++) {
-  let tag = faker.helpers.randomize(tags);
+for (let i = 1; i <= 20; i++) {
+  let tags = [];
+  for (let i = 0; i < 5; i++) {
+    tags.push(faker.helpers.randomize(tagCategory));
+  }
+  uniqTags = [...new Set(tags)];
   let isClose = faker.helpers.randomize(isClosed);
   data.push({
     id: nanoid(),
@@ -24,7 +38,7 @@ for (let i = 1; i <= 10; i++) {
     ],
     createdDate: faker.date.recent(),
     dueDate: faker.date.between(faker.date.recent(), faker.date.future(30)),
-    tags: tag,
+    tags: uniqTags,
     img: faker.image.imageUrl(),
     isClosed: isClose,
     eventOrganizer: faker.company.companyName(),
@@ -40,7 +54,7 @@ for (let i = 1; i <= 10; i++) {
 module.exports = function() {
   return {
     events: data,
-    tags: tags,
+    tags: tagCategory,
     //tags: [],
   };
 };
